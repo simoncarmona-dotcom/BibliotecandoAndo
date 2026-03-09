@@ -15,6 +15,7 @@ namespace BibliotecandoAndo {
                     case "2": ShowUsersMenu(); break;
                     case "3": ShowLoansMenu(); break;
                     case "4": ShowSearchReportsMenu(); break;
+                    case "5": ShowPersistenceMenu(); break;
                     case "6": exit = true; break;
                 }
             }
@@ -42,6 +43,12 @@ namespace BibliotecandoAndo {
             Console.Clear();
             Console.WriteLine("--- MENÚ BÚSQUEDAS Y REPORTES ---");
             Console.WriteLine("1. Buscar libro\n2. Buscar usuario\n3. Reportes\n4. Volver");
+            Pause();
+        }
+        static void ShowPersistenceMenu() {
+            Console.Clear();
+            Console.WriteLine("--- MENÚ GUARDAR/CARGAR DATOS ---");
+            Console.WriteLine("1. Guardar datos\n2. Cargar datos\n3. Reiniciar datos\n4. Volver");
             Pause();
         }
 
