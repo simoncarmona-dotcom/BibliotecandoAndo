@@ -9,11 +9,21 @@ namespace BibliotecandoAndo {
                 Console.Clear();
                 Console.WriteLine("=== SISTEMA BIBLIOTECANDO ANDO ===");
                 Console.WriteLine("1. Libros\n2. Usuarios\n3. Préstamos\n4. Búsquedas y reportes\n5. Guardar/Cargar\n6. Salir");
-                Console.Write("Seleccione una opción: ");
-                string input = Console.ReadLine();
-                if (input == "6") exit = true;
+                Console.Write("Opción: ");
+                switch (Console.ReadLine()) {
+                    case "1": ShowBooksMenu(); break;
+                    case "6": exit = true; break;
+                }
             }
         }
+
+        static void ShowBooksMenu() {
+            Console.Clear();
+            Console.WriteLine("--- MENÚ LIBROS ---");
+            Console.WriteLine("1. Registrar libro\n2. Listar libros\n3. Ver detalle\n4. Actualizar libro\n5. Eliminar libro\n6. Volver");
+            Pause();
+        }
+
         static void Pause() { Console.WriteLine("\nPresione Enter para continuar..."); Console.ReadLine(); }
         static void ShowError(string m) { Console.WriteLine($"\n[!] {m}"); Pause(); }
     }
