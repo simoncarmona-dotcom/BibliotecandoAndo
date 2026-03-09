@@ -16,22 +16,41 @@ namespace BibliotecandoAndo {
                     case "3": ShowLoansMenu(); break;
                     case "4": ShowSearchReportsMenu(); break;
                     case "5": ShowPersistenceMenu(); break;
-                    case "6": exit = true; break;
+                    case "6": exit = ConfirmExitAndSave(); break;
                 }
             }
         }
 
-        static void ShowBooksMenu() {
+       static void ShowBooksMenu() {
             Console.Clear();
             Console.WriteLine("--- MENÚ LIBROS ---");
             Console.WriteLine("1. Registrar libro\n2. Listar libros\n3. Ver detalle\n4. Actualizar libro\n5. Eliminar libro\n6. Volver");
-            Pause();
+            Console.Write("Opción: ");
+            switch (Console.ReadLine()) {
+                case "1": Console.WriteLine("Registrando nuevo libro..."); Pause(); break;
+                case "2": Console.WriteLine("Listando libros (Todos / Disponibles / Prestados)..."); Pause(); break;
+                case "3": Console.WriteLine("Mostrando detalle del libro..."); Pause(); break;
+                case "4": Console.WriteLine("Actualizando datos del libro..."); Pause(); break;
+                case "5": Console.WriteLine("Validar: no permitir si está prestado. Eliminando libro..."); Pause(); break;
+                case "6": return;
+                default: ShowError("Opción inválida."); break;
+            }
         }
+
         static void ShowUsersMenu() {
             Console.Clear();
             Console.WriteLine("--- MENÚ USUARIOS ---");
             Console.WriteLine("1. Registrar usuario\n2. Listar usuarios\n3. Ver detalle\n4. Actualizar usuario\n5. Eliminar usuario\n6. Volver");
-            Pause();
+            Console.Write("Opción: ");
+            switch (Console.ReadLine()) {
+                case "1": Console.WriteLine("Registrando nuevo usuario..."); Pause(); break;
+                case "2": Console.WriteLine("Listando todos los usuarios..."); Pause(); break;
+                case "3": Console.WriteLine("Mostrando detalle del usuario..."); Pause(); break;
+                case "4": Console.WriteLine("Actualizando datos del usuario..."); Pause(); break;
+                case "5": Console.WriteLine("Validar: no permitir si tiene préstamos activos. Eliminando usuario..."); Pause(); break;
+                case "6": return;
+                default: ShowError("Opción inválida."); break;
+            }
         }
         static void ShowLoansMenu() {
             Console.Clear();
@@ -54,5 +73,14 @@ namespace BibliotecandoAndo {
 
         static void Pause() { Console.WriteLine("\nPresione Enter para continuar..."); Console.ReadLine(); }
         static void ShowError(string m) { Console.WriteLine($"\n[!] {m}"); Pause(); }
+
+        static bool ConfirmExitAndSave() {
+            Console.Write("¿Guardar antes de salir? (S/N): ");
+            if (Console.ReadLine().ToUpper() == "S") {
+                Console.WriteLine("Simulando guardado de datos...");
+                Pause();
+            }
+            return true;
+        }
     }
 }
