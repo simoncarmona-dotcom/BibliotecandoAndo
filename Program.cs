@@ -71,13 +71,32 @@ namespace BibliotecandoAndo {
             Console.Clear();
             Console.WriteLine("--- MENÚ BÚSQUEDAS Y REPORTES ---");
             Console.WriteLine("1. Buscar libro\n2. Buscar usuario\n3. Reportes\n4. Volver");
-            Pause();
+            Console.Write("Opción: ");
+            switch (Console.ReadLine()) {
+                case "1": Console.WriteLine("Buscando libro por título/autor/categoría..."); Pause(); break;
+                case "2": Console.WriteLine("Buscando usuario por nombre/documento..."); Pause(); break;
+                case "3": Console.WriteLine("Generando reportes (Vencidos / Por usuario / Por libro)..."); Pause(); break;
+                case "4": return;
+                default: ShowError("Opción inválida."); break;
+            }
         }
+
         static void ShowPersistenceMenu() {
             Console.Clear();
             Console.WriteLine("--- MENÚ GUARDAR/CARGAR DATOS ---");
             Console.WriteLine("1. Guardar datos\n2. Cargar datos\n3. Reiniciar datos\n4. Volver");
-            Pause();
+            Console.Write("Opción: ");
+            switch (Console.ReadLine()) {
+                case "1": Console.WriteLine("Simulando guardado de datos en disco..."); Pause(); break;
+                case "2": Console.WriteLine("Simulando carga de datos desde disco..."); Pause(); break;
+                case "3": 
+                    Console.Write("¿Seguro que desea reiniciar los datos? (S/N): ");
+                    if(Console.ReadLine().ToUpper() == "S") Console.WriteLine("Datos reiniciados.");
+                    Pause(); 
+                    break;
+                case "4": return;
+                default: ShowError("Opción inválida."); break;
+            }
         }
 
         static void Pause() { Console.WriteLine("\nPresione Enter para continuar..."); Console.ReadLine(); }
