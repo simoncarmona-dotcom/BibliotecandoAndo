@@ -56,7 +56,16 @@ namespace BibliotecandoAndo {
             Console.Clear();
             Console.WriteLine("--- MENÚ PRÉSTAMOS ---");
             Console.WriteLine("1. Crear préstamo\n2. Listar préstamos\n3. Ver detalle\n4. Registrar devolución\n5. Eliminar préstamo\n6. Volver");
-            Pause();
+            Console.Write("Opción: ");
+            switch (Console.ReadLine()) {
+                case "1": Console.WriteLine("Validaciones: Verificar usuario activo y libro disponible. Creando préstamo..."); Pause(); break;
+                case "2": Console.WriteLine("Listando préstamos (Todos / Activos / Cerrados)..."); Pause(); break;
+                case "3": Console.WriteLine("Mostrando detalle del préstamo..."); Pause(); break;
+                case "4": Console.WriteLine("Préstamo marcado como devuelto. Libro disponible."); Pause(); break;
+                case "5": Console.WriteLine("Eliminando registro de préstamo..."); Pause(); break;
+                case "6": return;
+                default: ShowError("Opción inválida."); break;
+            }
         }
         static void ShowSearchReportsMenu() {
             Console.Clear();
