@@ -1,0 +1,15 @@
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\bin\Debug\net10.0\BibliotecandoAndo.exe
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\bin\Debug\net10.0\BibliotecandoAndo.deps.json
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\bin\Debug\net10.0\BibliotecandoAndo.runtimeconfig.json
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\bin\Debug\net10.0\BibliotecandoAndo.dll
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\bin\Debug\net10.0\BibliotecandoAndo.pdb
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.AssemblyInfo.cs
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.sourcelink.json
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.dll
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\refint\BibliotecandoAndo.dll
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.pdb
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\BibliotecandoAndo.genruntimeconfig.cache
+C:\Users\Admin\Documents\c# sena\c# sena6\BibliotecandoAndo\obj\Debug\net10.0\ref\BibliotecandoAndo.dll
