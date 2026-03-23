@@ -2,21 +2,16 @@ using System;
 
 namespace BibliotecandoAndo.Models {
     public class Libro {
-        // Propiedades
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string Autor { get; set; }
         public int AnioPublicacion { get; set; }
         public string Categoria { get; set; }
-        
-        // Condición de la guía: Inicializar Disponible = true
         public bool Disponible { get; set; } = true;
 
-        // Constructor vacío
         public Libro() {
         }
 
-        // Constructor completo
         public Libro(int id, string titulo, string autor, int anioPublicacion, string categoria) {
             Id = id;
             Titulo = titulo;
@@ -26,7 +21,6 @@ namespace BibliotecandoAndo.Models {
             Disponible = true;
         }
 
-        // Métodos requeridos
         public string ResumenCorto() {
             return $"{Titulo} - {Autor}";
         }
