@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using BibliotecandoAndo.Models;
+using BibliotecandoAndo.Services;
 
 namespace BibliotecandoAndo {
     class Program {
@@ -12,7 +14,7 @@ namespace BibliotecandoAndo {
             while (!exit) {
                 Console.Clear();
                 Console.WriteLine("=== SISTEMA BIBLIOTECANDO ANDO ===");
-                Console.WriteLine("1. Libros\n2. Usuarios\n3. Préstamos\n4. Búsquedas y reportes\n5. Guardar/Cargar\n6. Salir");
+                Console.WriteLine("1. Libros\n2. Usuarios\n3. Préstamos\n4. Búsquedas y reportes\n5. Guardar/Cargar\n6. Pruebas EV08 (Servicios, KPIs y Arrays vs List)\n7. Salir");
                 Console.Write("Seleccione una opción: ");
                 
                 switch (Console.ReadLine()) {
@@ -21,7 +23,8 @@ namespace BibliotecandoAndo {
                     case "3": ShowLoansMenu(); break;
                     case "4": ShowSearchReportsMenu(); break;
                     case "5": ShowPersistenceMenu(); break;
-                    case "6": exit = ConfirmExitAndSave(); break;
+                    case "6": RunEV08Tests(); break;
+                    case "7": exit = ConfirmExitAndSave(); break;
                     default: ShowError("Opción no válida."); break;
                 }
             }
@@ -138,6 +141,67 @@ namespace BibliotecandoAndo {
                 case "4": return;
                 default: ShowError("Opción inválida."); break;
             }
+        }
+
+        static void RunEV08Tests() {
+            Console.Clear();
+            Console.WriteLine("=== 1. COMPARACION ARRAY VS LIST ===");
+            
+            string[] arrayLibros = new string[2];
+            arrayLibros[0] = "Libro A";
+            arrayLibros[1] = "Libro B";
+            
+            List<string> listLibros = new List<string>();
+            listLibros.Add("Libro A");
+            listLibros.Add("Libro B");
+            listLibros.Add("Libro C");
+
+            Console.WriteLine("Array: Tamaño fijo (2). Si intentas agregar un tercero, el programa falla.");
+            Console.WriteLine($"List: Tamaño dinámico. Permite agregar sin límite. Elementos actuales: {listLibros.Count}");
+            
+            Console.WriteLine("\n=== 2. PRUEBA DE SERVICIOS Y KPIs ===");
+            LibroService libroService = new LibroService();
+            UsuarioService usuarioService = new UsuarioService();
+            PrestamoService prestamoService = new PrestamoService();
+
+            Libro l1 = new Libro(1, "El Quijote", "Cervantes", 1605, "Novela");
+            Libro l2 = new Libro(2, "Cien Anos de Soledad", "Garcia Marquez", 1967, "Novela");
+            l2.Disponible = false;
+            libroService.AgregarLibro(l1);
+            libroService.AgregarLibro(l2);
+
+            Usuario u1 = new Usuario(1, "Zendaya", "123", "zen@mail.com");
+            Usuario u2 = new Usuario(2, "Alberto", "456", "alberto@mail.com");
+            u2.Activo = false;
+            usuarioService.AgregarUsuario(u1);
+            usuarioService.AgregarUsuario(u2);
+
+            Prestamo p1 = new Prestamo(1, l2, u1, DateTime.Now.AddDays(-5), 14);
+            Prestamo p2 = new Prestamo(2, l1, u2, DateTime.Now.AddDays(-20), 14);
+            p2.Estado = EstadoPrestamo.Vencido;
+            prestamoService.AgregarPrestamo(p1);
+            prestamoService.AgregarPrestamo(p2);
+
+            Console.WriteLine("\n--- KPIs Libros ---");
+            Console.WriteLine($"Total: {libroService.TotalLibros()} | Disponibles: {libroService.LibrosDisponibles()} | Prestados: {libroService.LibrosPrestados()}");
+            
+            Console.WriteLine("\n--- KPIs Usuarios ---");
+            Console.WriteLine($"Total: {usuarioService.TotalUsuarios()} | Activos: {usuarioService.UsuariosActivos()} | Inactivos: {usuarioService.UsuariosInactivos()}");
+
+            Console.WriteLine("\n--- KPIs Prestamos ---");
+            Console.WriteLine($"Total: {prestamoService.TotalPrestamos()} | Activos: {prestamoService.PrestamosActivos()} | Vencidos: {prestamoService.PrestamosVencidos()}");
+            
+            Console.WriteLine("\n--- Ordenacion Usuarios (Por Nombre) ---");
+            foreach(var u in usuarioService.OrdenarPorNombre()) {
+                Console.WriteLine($"- {u.Nombre}");
+            }
+
+            Console.WriteLine("\n--- Busqueda Libros (Criterio: 'Cien') ---");
+            foreach(var l in libroService.BuscarLibro("Cien")) {
+                Console.WriteLine($"- {l.Titulo}");
+            }
+
+            Pause();
         }
 
         static bool ConfirmExitAndSave() {
