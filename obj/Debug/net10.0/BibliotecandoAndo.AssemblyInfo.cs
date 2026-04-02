@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BibliotecandoAndo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb00e20f97dc0bd867123c26653fd24ef9c119eb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b2d2cf4f9544445acf066822e324fed2cc6541c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BibliotecandoAndo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BibliotecandoAndo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
