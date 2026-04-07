@@ -5,7 +5,6 @@ using BibliotecandoAndo.Services;
 
 namespace BibliotecandoAndo {
     class Program {
-        // Instancias globales de los servicios para que conserven la memoria
         static LibroService libroService = new LibroService();
         static UsuarioService usuarioService = new UsuarioService();
         static PrestamoService prestamoService = new PrestamoService();
@@ -42,8 +41,7 @@ namespace BibliotecandoAndo {
                 Console.WriteLine("--- MENÚ LIBROS ---");
                 Console.WriteLine("1. Registrar libro (Add)");
                 Console.WriteLine("2. Listar libros (Obtener Todos)");
-                Console.WriteLine("3. Ver detalle");
-                Console.WriteLine("4. Actualizar libro");
+                Console.WriteLine("3. Ver detalle\n4. Actualizar libro");
                 Console.WriteLine("5. Eliminar libro (Remove)");
                 Console.WriteLine("6. Volver");
                 Console.Write("Opción: ");
@@ -64,35 +62,26 @@ namespace BibliotecandoAndo {
 
                         Libro nuevoLibro = new Libro(id, titulo, autor, anio, categoria);
                         libroService.AgregarLibro(nuevoLibro);
-                        Console.WriteLine("\n¡Libro agregado con éxito a la lista!"); 
+                        Console.WriteLine("\n¡Libro agregado con éxito!"); 
                         Pause(); 
                         break;
                     case "2": 
                         Console.WriteLine("\n--- LISTA DE LIBROS REGISTRADOS ---");
                         var listaLibros = libroService.ObtenerTodos();
-                        if(listaLibros.Count == 0) {
-                            Console.WriteLine("No hay libros en el sistema.");
-                        } else {
-                            foreach(var l in listaLibros) {
-                                Console.WriteLine($"- ID: {l.Id} | Título: {l.Titulo} | Autor: {l.Autor} | Disponible: {l.Disponible}");
-                            }
-                        }
+                        if(listaLibros.Count == 0) Console.WriteLine("No hay libros.");
+                        else foreach(var l in listaLibros) Console.WriteLine($"- ID: {l.Id} | Título: {l.Titulo} | Autor: {l.Autor}");
                         Pause(); 
                         break;
-                    case "3": Console.WriteLine("Mostrando detalle del libro..."); Pause(); break;
-                    case "4": Console.WriteLine("Actualizando datos del libro..."); Pause(); break;
+                    case "3": Console.WriteLine("En construcción..."); Pause(); break;
+                    case "4": Console.WriteLine("En construcción..."); Pause(); break;
                     case "5": 
                         Console.WriteLine("\n--- ELIMINAR LIBRO ---");
-                        Console.Write("Ingrese el ID o Título del libro a eliminar: ");
-                        string buscarEliminar = Console.ReadLine();
-                        var librosEncontrados = libroService.BuscarLibro(buscarEliminar);
-                        
+                        Console.Write("Ingrese Título o ID a eliminar: ");
+                        var librosEncontrados = libroService.BuscarLibro(Console.ReadLine());
                         if(librosEncontrados.Count > 0) {
                             libroService.EliminarLibro(librosEncontrados[0]);
-                            Console.WriteLine($"El libro '{librosEncontrados[0].Titulo}' ha sido eliminado.");
-                        } else {
-                            Console.WriteLine("No se encontró ningún libro con ese criterio.");
-                        }
+                            Console.WriteLine($"Libro '{librosEncontrados[0].Titulo}' eliminado.");
+                        } else Console.WriteLine("No encontrado.");
                         Pause(); 
                         break;
                     case "6": back = true; break;
@@ -102,57 +91,91 @@ namespace BibliotecandoAndo {
         }
 
         static void ShowUsersMenu() {
-            Console.Clear();
-            Console.WriteLine("--- MENÚ USUARIOS ---");
-            Console.WriteLine("1. Registrar usuario\n2. Listar usuarios\n3. Ver detalle\n4. Actualizar usuario\n5. Eliminar usuario\n6. Volver");
-            Console.Write("Opción: ");
-            switch (Console.ReadLine()) {
-                case "6": return;
-                default: Console.WriteLine("Funcionalidad en construcción..."); Pause(); break;
+            bool back = false;
+            while (!back) {
+                Console.Clear();
+                Console.WriteLine("--- MENÚ USUARIOS ---");
+                Console.WriteLine("1. Registrar usuario (Add)");
+                Console.WriteLine("2. Listar usuarios (Obtener Todos)");
+                Console.WriteLine("3. Ver detalle\n4. Actualizar usuario");
+                Console.WriteLine("5. Eliminar usuario (Remove)");
+                Console.WriteLine("6. Volver");
+                Console.Write("Opción: ");
+                
+                switch (Console.ReadLine()) {
+                    case "1": 
+                        Console.WriteLine("\n--- REGISTRAR NUEVO USUARIO ---");
+                        Console.Write("ID del Usuario: ");
+                        int id = int.Parse(Console.ReadLine());
+                        Console.Write("Nombre: ");
+                        string nombre = Console.ReadLine();
+                        Console.Write("Documento: ");
+                        string documento = Console.ReadLine();
+                        Console.Write("Correo: ");
+                        string correo = Console.ReadLine();
+
+                        Usuario nuevoUsuario = new Usuario(id, nombre, documento, correo);
+                        usuarioService.AgregarUsuario(nuevoUsuario);
+                        Console.WriteLine("\n¡Usuario agregado con éxito!"); 
+                        Pause(); 
+                        break;
+                    case "2": 
+                        Console.WriteLine("\n--- LISTA DE USUARIOS REGISTRADOS ---");
+                        var listaUsuarios = usuarioService.ObtenerTodos();
+                        if(listaUsuarios.Count == 0) Console.WriteLine("No hay usuarios.");
+                        else foreach(var u in listaUsuarios) Console.WriteLine($"- ID: {u.Id} | Nombre: {u.Nombre} | Doc: {u.Documento}");
+                        Pause(); 
+                        break;
+                    case "3": Console.WriteLine("En construcción..."); Pause(); break;
+                    case "4": Console.WriteLine("En construcción..."); Pause(); break;
+                    case "5": 
+                        Console.WriteLine("\n--- ELIMINAR USUARIO ---");
+                        Console.Write("Ingrese Nombre o Documento a eliminar: ");
+                        var usuariosEncontrados = usuarioService.BuscarUsuario(Console.ReadLine());
+                        if(usuariosEncontrados.Count > 0) {
+                            usuarioService.EliminarUsuario(usuariosEncontrados[0]);
+                            Console.WriteLine($"Usuario '{usuariosEncontrados[0].Nombre}' eliminado.");
+                        } else Console.WriteLine("No encontrado.");
+                        Pause(); 
+                        break;
+                    case "6": back = true; break;
+                    default: ShowError("Opción inválida."); break;
+                }
             }
         }
 
         static void ShowLoansMenu() {
             Console.Clear();
-            Console.WriteLine("--- MENÚ PRÉSTAMOS ---");
-            Console.WriteLine("1. Crear préstamo\n2. Listar préstamos\n3. Ver detalle\n4. Registrar devolución\n5. Eliminar préstamo\n6. Volver");
+            Console.WriteLine("--- MENÚ PRÉSTAMOS ---\n6. Volver");
             Console.Write("Opción: ");
-            switch (Console.ReadLine()) {
-                case "6": return;
-                default: Console.WriteLine("Funcionalidad en construcción..."); Pause(); break;
-            }
+            if(Console.ReadLine() == "6") return;
         }
 
         static void ShowSearchReportsMenu() {
             bool back = false;
             while(!back) {
                 Console.Clear();
-                Console.WriteLine("--- MENÚ BÚSQUEDAS Y REPORTES ---");
-                Console.WriteLine("1. Buscar libro por criterio (Search)");
+                Console.WriteLine("--- MENÚ BÚSQUEDAS ---");
+                Console.WriteLine("1. Buscar libro");
                 Console.WriteLine("2. Buscar usuario");
-                Console.WriteLine("3. Reportes");
-                Console.WriteLine("4. Volver");
+                Console.WriteLine("3. Volver");
                 Console.Write("Opción: ");
                 switch (Console.ReadLine()) {
                     case "1": 
-                        Console.WriteLine("\n--- BUSCAR LIBRO ---");
-                        Console.Write("Ingrese título, autor o ID a buscar: ");
-                        string criterio = Console.ReadLine();
-                        var resultados = libroService.BuscarLibro(criterio);
-                        
-                        if(resultados.Count == 0) {
-                            Console.WriteLine("No se encontraron coincidencias.");
-                        } else {
-                            Console.WriteLine("\nResultados encontrados:");
-                            foreach(var l in resultados) {
-                                Console.WriteLine($"- {l.Titulo} (Autor: {l.Autor})");
-                            }
-                        }
+                        Console.Write("\nIngrese título, autor o ID: ");
+                        var resLibros = libroService.BuscarLibro(Console.ReadLine());
+                        if(resLibros.Count == 0) Console.WriteLine("Sin resultados.");
+                        else foreach(var l in resLibros) Console.WriteLine($"- {l.Titulo}");
                         Pause(); 
                         break;
-                    case "2": Console.WriteLine("Buscando usuario por nombre/documento..."); Pause(); break;
-                    case "3": Console.WriteLine("Generando reportes..."); Pause(); break;
-                    case "4": back = true; break;
+                    case "2": 
+                        Console.Write("\nIngrese nombre o documento: ");
+                        var resUsuarios = usuarioService.BuscarUsuario(Console.ReadLine());
+                        if(resUsuarios.Count == 0) Console.WriteLine("Sin resultados.");
+                        else foreach(var u in resUsuarios) Console.WriteLine($"- {u.Nombre}");
+                        Pause(); 
+                        break;
+                    case "3": back = true; break;
                     default: ShowError("Opción inválida."); break;
                 }
             }
@@ -160,32 +183,18 @@ namespace BibliotecandoAndo {
 
         static void ShowPersistenceMenu() {
             Console.Clear();
-            Console.WriteLine("--- MENÚ GUARDAR/CARGAR DATOS ---");
-            Console.WriteLine("1. Guardar datos\n2. Cargar datos\n3. Reiniciar datos\n4. Volver");
+            Console.WriteLine("--- MENÚ GUARDAR/CARGAR ---\n4. Volver");
             Console.Write("Opción: ");
-            switch (Console.ReadLine()) {
-                case "4": return;
-                default: Console.WriteLine("Funcionalidad en construcción..."); Pause(); break;
-            }
+            if(Console.ReadLine() == "4") return;
         }
 
         static void RunEV08Tests() {
             Console.Clear();
             Console.WriteLine("=== PRUEBA DE KPIs Y ARRAYS VS LIST ===");
-            
-            string[] arrayLibros = new string[2];
-            arrayLibros[0] = "Libro A";
-            arrayLibros[1] = "Libro B";
-            
-            List<string> listLibros = new List<string>();
-            listLibros.Add("Libro A");
-            listLibros.Add("Libro B");
-            listLibros.Add("Libro C");
-
             Console.WriteLine("Array: Tamaño fijo (2). Si intentas agregar un tercero, falla.");
-            Console.WriteLine($"List: Tamaño dinámico. Permite agregar sin límite. Elementos: {listLibros.Count}");
-            
-            Console.WriteLine($"\nTotal libros en memoria interactiva: {libroService.TotalLibros()}");
+            Console.WriteLine("List: Tamaño dinámico. Permite agregar sin límite.");
+            Console.WriteLine($"\nTotal libros en memoria: {libroService.TotalLibros()}");
+            Console.WriteLine($"Total usuarios en memoria: {usuarioService.TotalUsuarios()}");
             Pause();
         }
 
